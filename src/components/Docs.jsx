@@ -1,4 +1,4 @@
-import { languages, notUsed, scripts, stack, techniques } from '../data/docs'
+import { aiAssist, languages, notUsed, scripts, stack, techniques } from '../data/docs'
 import Section from './Section'
 
 export default function Docs() {
@@ -10,7 +10,7 @@ export default function Docs() {
         <p className="summary">
           The frameworks, languages and tools behind this site, and how they fit together.
         </p>
-        <a className="btn" href="#about">← Back to profile</a>
+        <a className="btn" href="#home">← Back to profile</a>
       </section>
 
       <Section id="languages" eyebrow="Languages" title="Languages">
@@ -39,6 +39,23 @@ export default function Docs() {
           ))}
         </ul>
         <p className="note">{notUsed}</p>
+      </Section>
+
+      <Section id="ai" eyebrow="How it was made" title="AI-assisted development">
+        <ul className="stack">
+          <li>
+            <div className="stack-head">
+              <span className="stack-cat">{aiAssist.category}</span>
+              <a href={aiAssist.url} target="_blank" rel="noreferrer">{aiAssist.name}</a>
+            </div>
+            <p>{aiAssist.note}</p>
+            <p>{aiAssist.summary}</p>
+            <h3 className="sub-label">What it helped with</h3>
+            <ul className="chips small">
+              {aiAssist.helped.map((h) => <li key={h}>{h}</li>)}
+            </ul>
+          </li>
+        </ul>
       </Section>
 
       <Section id="techniques" eyebrow="Under the hood" title="Techniques">

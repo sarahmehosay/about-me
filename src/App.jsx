@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
-import BuiltWith from './components/BuiltWith'
+import About from './components/About'
 import Contact from './components/Contact'
 import Docs from './components/Docs'
 import Education from './components/Education'
 import Experience from './components/Experience'
 import Hero from './components/Hero'
 import Nav from './components/Nav'
+import Process from './components/Process'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Tools from './components/Tools'
 import useLiveProjects from './hooks/useLiveProjects'
-import { education, experience, highlights, profile, projects, skills, tools, training } from './data/profile'
+import {
+  education, experience, featuredSkills, highlights, process, profile, projects, publications, skills, tools, traits, training,
+} from './data/profile'
 
-const YEAR = new Date().getFullYear()
 const DOCS = '#/docs'
 
 const currentPage = () => (window.location.hash.startsWith(DOCS) ? 'docs' : 'home')
@@ -40,25 +42,26 @@ export default function App() {
   return (
     <>
       <Nav name={profile.name} page={page} docsHref={DOCS} hide={liveProjects?.length ? [] : ['projects']} />
-      <main>
-        {page === 'docs' ? (
-          <Docs />
-        ) : (
-          <>
-            <Hero profile={profile} highlights={highlights} />
-            <Skills skills={skills} />
+      {page === 'docs' ? (
+        <>
+          <main><Docs /></main>
+          <Contact contact={profile.contact} name={profile.name} docsHref={DOCS} />
+        </>
+      ) : (
+        <>
+          <main>
+            <Hero profile={profile} highlights={highlights} hasProjects={!!liveProjects?.length} publications={publications} />
+            <About summary={profile.summary} traits={traits} />
+            <Skills featured={featuredSkills} skills={skills} />
             <Tools tools={tools} />
-            <Experience experience={experience} />
             <Projects projects={liveProjects} />
+            <Experience experience={experience} publications={publications} />
+            <Process steps={process} />
             <Education education={education} training={training} />
-            <BuiltWith docsHref={DOCS} />
-            <Contact contact={profile.contact} />
-          </>
-        )}
-      </main>
-      <footer>
-        © {YEAR} {profile.name} · <a href={DOCS}>How this page is built</a>
-      </footer>
+          </main>
+          <Contact contact={profile.contact} name={profile.name} docsHref={DOCS} />
+        </>
+      )}
     </>
   )
 }

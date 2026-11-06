@@ -6,6 +6,9 @@ export const profile = {
   title: 'Full-Stack Developer | GIS Developer',
   summary:
     'Full-Stack and GIS Developer with 9+ years of experience in software development, specializing in frontend development, full-stack applications, and GIS solutions. Proficient in Vue.js, CesiumJS, Python, and Java/Spring Boot, with experience developing web-based point cloud visualization platforms, ERP modules, and inventory, accounting & warehouse systems. Skilled in LiDAR data processing, system integration, testing, and deployment within Agile environments.',
+  // Short intro shown in the hero; the longer summary appears in About.
+  tagline:
+    'I build web-based GIS and point cloud tools and full-stack business systems, turning complex spatial data into clear, usable interfaces.',
   contact: {
     email: 'sarahmeh.osay@gmail.com',
     phone: null,
@@ -18,7 +21,66 @@ export const highlights = [
   { value: '9+', label: 'years in software development' },
   { value: '100+', label: 'GIS features shipped' },
   { value: '950+', label: 'bugs & issues resolved' },
-  { value: '1', label: 'peer-reviewed paper' },
+  { value: '2', label: 'research publications', publications: true }, // shows a "View publications" button
+]
+
+// Research publications shown in the pop-up (author names in APA style; `me` is highlighted).
+// Journal article: author order, title, journal and pages checked against the official DOI record (JaLC).
+// Conference paper: author order and title follow the proceedings citation; no public copy is online.
+export const publications = [
+  {
+    type: 'Journal article',
+    title: 'Comparison and evaluation of ground surface classification methods for LiDAR point clouds',
+    titleJa: 'LiDAR 点群の地表面分類手法の比較・検証',
+    authors: ['Yaginuma, H.', 'Itakura, K.', 'Aruga, K.', 'Nakashima, Y.', 'Osay, S. M.'],
+    me: 'Osay, S. M.',
+    year: 2025,
+    venue: 'Artificial Intelligence and Data Science',
+    venueJa: 'AI・データサイエンス論文集',
+    detail: '6(3), 559–572 · Japan Society of Civil Engineers',
+    keywords: ['Point Cloud', 'Progressive TIN', 'SMRF', 'CSF', 'Ground Filtering'],
+    role: 'Co-authored research on ground surface classification methods, contributing to LiDAR and point cloud processing research.',
+    links: [
+      ['Read on J-STAGE', 'https://www.jstage.jst.go.jp/article/jsceiii/6/3/6_559/_article/-char/en', true],
+      ['Open PDF', 'https://www.jstage.jst.go.jp/article/jsceiii/6/3/6_559/_pdf', false],
+      ['DOI: 10.11532/jsceiii.6.3_559', 'https://doi.org/10.11532/jsceiii.6.3_559', false],
+    ],
+    note: 'Peer-reviewed: received June 30, 2025, accepted September 5, 2025. Written in Japanese. The publisher does not allow its pages to be shown inside other sites, so the links open in a new tab.',
+  },
+  {
+    type: 'Conference paper',
+    title: 'Web Visualization of Flood Events and Hazards for Davao Region',
+    authors: ['Osay, S. M. S.', 'De Leon, R. K. L.', 'Oguis, G. K. R.', 'James, G. R. P.', 'Garillos-Manliguez, C.', 'Acosta, J. E.'],
+    me: 'Osay, S. M. S.',
+    year: 2017,
+    venue: 'Philippine National LiDAR Conference',
+    detail: 'Cebu City, Philippines · January 18–20, 2017',
+    links: [],
+    note: 'Published in the conference proceedings. No public copy was found online, so there is no direct link.',
+  },
+]
+
+// Personality traits shown in About (icon names are defined in components/Icons.jsx).
+export const traits = [
+  { icon: 'globe', label: 'GIS & 3D visualization' },
+  { icon: 'layers', label: 'Full-stack builder' },
+  { icon: 'bug', label: 'Bug hunter (950+ fixed)' },
+  { icon: 'flask', label: 'Research-minded' },
+  { icon: 'users', label: 'Agile team player' },
+  { icon: 'sparkles', label: 'AI-assisted development' },
+]
+
+// Skill tiles shown first; the "All skills" tile reveals every group below.
+export const featuredSkills = [
+  ['Vue', 'Vue.js'],
+  ['Cs', 'CesiumJS'],
+  ['JS', 'JavaScript'],
+  ['Py', 'Python'],
+  ['Jv', 'Java'],
+  ['SB', 'Spring Boot'],
+  ['PG', 'PostgreSQL'],
+  ['Dk', 'Docker'],
+  ['GIS', 'ArcGIS'],
 ]
 
 export const skills = [
@@ -74,6 +136,9 @@ export const tools = [
 export const experience = [
   {
     role: 'GIS Engineer',
+    publication: 'Comparison and evaluation of ground surface classification methods for LiDAR point clouds', // title of an entry in `publications`
+    icon: 'briefcase',
+    summary: 'Building a web-based point cloud processing and visualization platform with Vue 3 and CesiumJS.',
     company: 'Locus Blue',
     period: 'Nov 2022 – Present',
     location: 'Tokyo, Japan (Remote)',
@@ -92,6 +157,8 @@ export const experience = [
   },
   {
     role: 'Full-Stack Web Developer',
+    icon: 'laptop',
+    summary: 'Built Odoo ERP modules, inventory and accounting systems, and microservices with Python, Java and Vue.js.',
     company: 'Apollo Technologies Inc.',
     period: 'Apr 2017 – Sep 2022',
     location: 'Davao City, Philippines',
@@ -106,6 +173,9 @@ export const experience = [
   },
   {
     role: 'Science Research Assistant',
+    publication: 'Web Visualization of Flood Events and Hazards for Davao Region', // title of an entry in `publications`
+    icon: 'map',
+    summary: 'Supported LiDAR-based flood risk research through field surveys, digitization and geospatial analysis.',
     company: 'Phil-LiDAR 1, University of the Philippines Mindanao',
     period: 'Jan 2016 – Dec 2016',
     location: 'Davao City, Philippines',
@@ -142,6 +212,15 @@ export const projects = [
       ['Backend (not in demo)', ['FastAPI (Python)', 'laspy', 'NumPy', 'SciPy']],
     ],
   },
+]
+
+// "How I work" steps.
+export const process = [
+  { icon: 'search', title: 'Understand', text: 'Clarify the problem and track tasks in ClickUp.' },
+  { icon: 'pen', title: 'Design', text: 'Review designs in Figma and plan the data flow.' },
+  { icon: 'code', title: 'Build', text: 'Code in VS Code with AI-assisted tools, versioned on GitHub.' },
+  { icon: 'check', title: 'Test', text: 'Unit tests with Vitest and Cypress; demos and bug reports on Loom.' },
+  { icon: 'rocket', title: 'Ship & improve', text: 'Deploy with Docker, then learn from Mixpanel and guide users with UserGuiding.' },
 ]
 
 export const education = [

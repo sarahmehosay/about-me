@@ -71,11 +71,29 @@ export const stack = [
 export const techniques = [
   ['Content as data', 'All resume text lives in src/data/profile.js. Components only handle layout, so content updates never touch the UI code.'],
   ['Hash routing', 'This page is reached at #/docs. A small hashchange listener switches pages, so it works on any static host (such as GitHub Pages) without a router library or server rules.'],
-  ['IntersectionObserver', 'A browser API that tracks which section is on screen and highlights it in the top menu.'],
+  ['Menu highlight', 'Scroll and pointer listeners work out which section you are reading (or pointing at) and highlight it in the top menu.'],
+  ['SVG illustrations & icons', 'The drawings and icons are hand-written inline SVG that take their colors from CSS variables, so they follow light and dark mode with no image files.'],
+  ['Live demos', 'Each demo URL is checked when the page loads; demos that respond are shown as scaled-down live previews and can be opened full size in a dialog.'],
   ['Light & dark mode', 'Colors are CSS custom properties that switch automatically with the system setting via prefers-color-scheme.'],
   ['Responsive layout', 'CSS Grid with auto-fit columns and a 640px breakpoint adapt the layout from desktop down to phones.'],
   ['Accessibility', 'Semantic landmarks (header, nav, main, section, footer), labelled sections, visible keyboard focus, and reduced-motion support.'],
 ]
+
+// AI assistance used to build this site. Shown in its own section on the Docs page.
+export const aiAssist = {
+  category: 'AI assistant',
+  name: 'Claude Code',
+  url: 'https://claude.com/claude-code',
+  summary:
+    'Following the instructions of the owner of the site, Claude Code, an AI coding assistant from Anthropic, helped set up the initial version of the site and test it.',
+  helped: [
+    'Setting up the initial version',
+    'Testing the site',
+    'Creating the illustrations and icons',
+    'Verifying that the links work',
+  ],
+  note: 'The owner of the site built it herself, including its framework, languages, features and design. The content is her own: her resume text, tools, projects and publications.',
+}
 
 export const notUsed = 'No UI component library, CSS framework, router, state-management library or backend. The page is plain React and CSS, which keeps the bundle small (under 80 kB of gzipped JavaScript).'
 

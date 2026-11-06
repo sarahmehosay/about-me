@@ -1,20 +1,34 @@
 import { useEffect, useRef, useState } from 'react'
+import useTheme from '../hooks/useTheme'
+import Icon from './Icons'
 
-// In page order, so the highlight follows the scroll position.
+// Menu links.
 const LINKS = [
+  ['home', 'Home'],
   ['about', 'About'],
   ['skills', 'Skills'],
   ['tools', 'Tools'],
+  ['projects', 'Work'],
   ['experience', 'Experience'],
-  ['projects', 'Projects'],
   ['education', 'Education'],
-  ['built-with', 'Built with'],
-  ['contact', 'Contact'],
+]
+// Every section in page order, with the menu item it highlights.
+const SECTIONS = [
+  ['home', 'home'],
+  ['about', 'about'],
+  ['skills', 'skills'],
+  ['tools', 'tools'],
+  ['projects', 'projects'],
+  ['experience', 'experience'],
+  ['process', 'experience'],
+  ['education', 'education'],
+  ['contact', 'contact'],
 ]
 
 export default function Nav({ name, page, docsHref, hide = [] }) {
-  const [active, setActive] = useState('about')
+  const [active, setActive] = useState('home')
   const navRef = useRef(null)
+  const [theme, toggleTheme] = useTheme()
 
   // On the profile page, highlight the section being looked at:
   // - with a mouse over the page, the section under the cursor (so when two sections
@@ -31,13 +45,13 @@ export default function Nav({ name, page, docsHref, hide = [] }) {
       const headerBottom = navRef.current?.closest('.nav')?.getBoundingClientRect().bottom ?? 0
       const useCursor = cursor.y !== null && cursor.y > headerBottom
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
-      if (!useCursor && atBottom) return setActive(LINKS[LINKS.length - 1][0])
+      if (!useCursor && atBottom) return setActive('contact')
       const y = useCursor ? cursor.y : window.innerHeight * 0.45
       // The last section whose top is above the line; covers gaps between sections and the footer.
-      let found = LINKS[0][0]
-      for (const [id] of LINKS) {
+      let found = SECTIONS[0][1]
+      for (const [id, nav] of SECTIONS) {
         const el = document.getElementById(id)
-        if (el && el.getBoundingClientRect().top <= y) found = id
+        if (el && el.getBoundingClientRect().top <= y) found = nav
       }
       setActive(found)
     }
@@ -78,13 +92,19 @@ export default function Nav({ name, page, docsHref, hide = [] }) {
   return (
     <header className="nav">
       <div className="nav-inner">
-        <a href="#about" className="brand" aria-label={`${name} – back to top`}>{initials}</a>
+        <a href="#home" className="brand" aria-label={`${name} – back to top`}>{initials}</a>
         <nav ref={navRef} aria-label="Sections">
           {LINKS.filter(([id]) => !hide.includes(id)).map(([id, label]) => (
             <a key={id} href={`#${id}`} className={current === id ? 'active' : undefined}>{label}</a>
           ))}
           <a href={docsHref} className={current === 'docs' ? 'active' : undefined} aria-current={current === 'docs' ? 'page' : undefined}>Docs</a>
         </nav>
+        <button type="button" className="theme-toggle" onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+          title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}>
+          <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={18} />
+        </button>
+        <a href="#contact" className={`btn primary small talk${current === 'contact' ? ' active' : ''}`}>Let&apos;s talk</a>
       </div>
     </header>
   )
