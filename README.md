@@ -24,6 +24,29 @@ npm run build     # outputs dist/
 npm run preview
 ```
 
+## Tests
+
+```bash
+npm test               # run all unit tests once
+npm run test:watch     # re-run while you edit
+npm run test:coverage  # also show which lines the tests cover
+```
+
+[Vitest](https://vitest.dev) with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/), running in a simulated browser (jsdom). The tests live in `src/test/`:
+
+| File | What it checks |
+| --- | --- |
+| `data.test.jsx` | The content files: required fields, links use https, icon names exist, a job's paper exists, no duplicates |
+| `useTheme.test.jsx` | Light/dark switch: system setting, saved choice, toggling, storage blocked |
+| `useLiveProjects.test.jsx` | Live-demo check: keeps online demos, drops failed ones, HEAD request, no update after unmount |
+| `Nav.test.jsx` | Menu links, which link is highlighted (scroll, mouse, bottom of page), theme button, sideways menu |
+| `sections.test.jsx` | Skills toggle, Experience and its publication box, Contact, Tools, Process, Education, About |
+| `dialogs.test.jsx` | Publications pop-up, Hero button, live-demo cards and the demo pop-up |
+| `App.test.jsx` | The whole page: section order, demo show/hide, Docs page routing, tab title, scrolling |
+| `indexHtml.test.js` | `index.html`: page shell, saved-theme script, Google Analytics snippet (the gtag.js file is never fetched in tests) |
+
+`src/test/setup.js` adds the browser features jsdom lacks (dialogs, `matchMedia`, scrolling) and cleans up after every test. Tests never touch the network: `fetch` is replaced with a fake.
+
 ## Deploy
 
 ### GitHub Pages (automatic)
